@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./headers.ejs')%>
+
+</head>
+
+<body>
+    <%- include('./navigation.ejs')%>
+
+        <div class="container">
+            <div id="app">
+
+                <button class="btn btn-primary" type="button" disabled v-if="serverList.length  === 0">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Loading...
+                </button>
+                <div v-else>
+                    <form class="input-group mb-3" @submit.prevent="createServer">
+                        <button class="btn btn-outline-secondary" type="submit">Отправить</button>
+                        <input type="text" class="form-control" v-model="client">
+                    </form>
+                    <ul class='list-group'>
+                        <li class='list-group-item' v-for="elem in serverList" v-on:click='removeElement(elem.id)'>
+                            <strong>
+                                {{elem.id}}
+                            </strong> {{elem.client}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src='/app.js'></script>
+</body>
+
+</html>
